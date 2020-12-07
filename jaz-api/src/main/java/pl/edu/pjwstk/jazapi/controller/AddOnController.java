@@ -29,4 +29,3 @@ public class AddOnController extends CrudController<AddOn> {
         };
     }
 }
-
