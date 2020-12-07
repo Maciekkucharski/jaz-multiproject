@@ -21,7 +21,7 @@ public abstract class CrudController<T extends DbEntity> {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
+    public ResponseEntity<List<Map<String, Object>>> getAll(@RequestParam(defaultValue = "4")int  size) {
         try {
             List<T> all = service.getAll();
             List<Map<String, Object>> payload = all.stream()
