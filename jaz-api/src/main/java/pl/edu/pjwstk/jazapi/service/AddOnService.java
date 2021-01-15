@@ -3,7 +3,6 @@ package pl.edu.pjwstk.jazapi.service;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jazapi.model.AddOn;
 import pl.edu.pjwstk.jazapi.repository.AddOnRepository;
-import pl.edu.pjwstk.jazapi.repository.CarRepository;
 
 import java.util.Optional;
 

@@ -4,7 +4,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.repository.CrudRepository;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,9 +20,16 @@ public abstract class CrudService<T extends DbEntity> {
         this.repository = repository;
     }
 
-    public List<T> getAll(int size, int page, String sort) {
-        Pageable paging = buildPaging(size, page, sort);
-        Iterable<T> items = repository.findAll(paging);
+
+    public List<T> getAll(int page, int size, String[] sort) {
+        Pageable pageable;
+        if (sort[0].equals("asc")) {
+            pageable = PageRequest.of(page, size, Sort.by(sort[1]).ascending());
+        } else {
+            pageable = PageRequest.of(page, size, Sort.by(sort[1]).descending());
+        }
+        Iterable<T> items = repository.findAll(pageable);
+
         var itemList = new ArrayList<T>();
 
         items.forEach(itemList::add);
@@ -60,4 +69,5 @@ public abstract class CrudService<T extends DbEntity> {
     }
 
     public abstract T createOrUpdate(T updateEntity);
+
 }
