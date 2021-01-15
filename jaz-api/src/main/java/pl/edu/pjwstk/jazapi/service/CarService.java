@@ -22,7 +22,6 @@ public class CarService extends CrudService<Car> {
     @Override
     public Car createOrUpdate(Car updateEntity) {
         if (updateEntity.getId() == null) {
-            System.out.println(updateEntity);
             var addons = updateEntity.getAddons();
             updateEntity.setAddons(Collections.emptySet());
             Car insertedCar = repository.save(updateEntity);
